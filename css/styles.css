@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  font-size: 1.3rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.search {
+  background-image: url(../images/pattern-bg-desktop.png);
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem 0 13rem 0;
+  gap: 2rem;
+  width: 100%;
+}
+
+.search h2 {
+  color: white;
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.form {
+  display: flex;
+  /* gap: -1; */
+  width: 40%;
+  /* margin-inline: 0 auto; */
+  /* margin: 0 5rem; */
+  padding: 0 5rem;
+}
+
+input {
+  width: 90%;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  outline: none;
+  border: none;
+}
+button {
+  width: 10%;
+  border: none;
+  /* background-color: hsl(0, 0%, 59%); */
+  background-color: hsl(0, 0%, 17%);
+  background-image: url(../images/icon-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  cursor: pointer;
+}
+
+
+.tracker {
+  /* position: relative; */
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  padding: 3rem;
+  width: 60%;
+  justify-content: space-between;
+  /* align-content: flex-start; */
+  margin: 0 auto;
+  border-radius: 1rem;
+  /* text-align: left; */
+  margin-top: -5.5rem;
+  /* border: 0.5px solid hsl(227deg 35% 25% / 29%); */
+  box-shadow: 1px 1px 15px 1px hsl(223, 50%, 87%, .65);
+}
+
+/* .tracker div:not(:last-child){
+    border-right: 1px solid wheat;
+    background-color: white;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start; 
+    align-items: center;
+    text-align: left;
+    
+} */
+
+.tracker div {
+  position: relative;
+  max-width: 15rem;
+  /* background-color: white; */
+}
+
+.tracker div:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  background-color: hsl(0, 0%, 59%);
+  width: 1px;
+  height: 7rem;
+  bottom: 0;
+  top: 0;
+  left: -2rem;
+}
+.tracker div {
+  padding-right: 1rem;
+  /* background-color: white; */
+}
+
+.tracker div h4{
+    color: hsl(0, 0%, 59%);
+    margin-bottom: 1rem;
+}
+
+/* map */
+#map {
+    /* flex: ; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* background-color: red; */
+  }
