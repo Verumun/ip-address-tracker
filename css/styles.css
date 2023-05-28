@@ -13,6 +13,8 @@ html {
 body {
   font-family: "Rubik", sans-serif;
   font-size: 1.3rem;
+  display: flex;
+  height: 100vh;
 }
 
 .main {
@@ -72,6 +74,12 @@ button {
 
 
 .tracker {
+    position: absolute;
+    top: 20rem;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
   /* position: relative; */
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -82,9 +90,9 @@ button {
   margin: 0 auto;
   border-radius: 1rem;
   /* text-align: left; */
-  margin-top: -5.5rem;
+  /* margin-top: -5.5rem; */
   /* border: 0.5px solid hsl(227deg 35% 25% / 29%); */
-  box-shadow: 1px 1px 15px 1px hsl(223, 50%, 87%, .65);
+  box-shadow: 1px 1px 15px 1px hsl(223, 50%, 87%, .15);
 }
 
 /* .tracker div:not(:last-child){
@@ -127,8 +135,10 @@ button {
 
 /* map */
 #map {
+    /* display: flex; */
     /* flex: ; */
     /* width: 100%; */
-    /* height: 100%; */
+    height: 100%;
+    /* z-index: ; */
     /* background-color: red; */
   }
