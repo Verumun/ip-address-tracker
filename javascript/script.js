@@ -13,6 +13,88 @@ ipInputEl.addEventListener('submit', function(){
     console.log(ipInputEl.value)
 })
 
+
+let map = null;
+let marker = null;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const { latitude, longitude } = position.coords;
+      const coords = [latitude, longitude];
+      initializeMap(coords);
+      fetchGeoLocationData(coords);
+    },
+    function () {
+      alert("Could not get location");
+    }
+  );
+}
+
+function initializeMap(coords) {
+  map = L.map("map").setView(coords, 13);
+
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  marker = L.marker(coords).addTo(map);
+}
+
+function fetchGeoLocationData(coords) {
+  fetch("https://ipapi.co/json/")
+    .then((res) => res.json())
+    .then((data) => renderResults(data, coords))
+    .catch((error) => displayError(error));
+}
+
+//------ Form
+formEl.onsubmit = (e) => {
+  e.preventDefault();
+  const ipAddress = ipInputEl.value;
+
+  fetch(`https://ipapi.co/${ipAddress}/json/`)
+    .then((res) => res.json())
+    .then((data) => {
+      const coords = [data.latitude, data.longitude];
+      map.setView(coords, 13);
+      marker.setLatLng(coords);
+      renderResults(data, coords);
+    })
+    .catch((error) => displayError(error));
+};
+
+function renderResults(data, coords) {
+  if (!data || data.error) {
+    throw new Error("Invalid data received");
+  }
+
+  ipEl.textContent = data.ip;
+  locationEl.textContent = `${data.city}, ${data.region}, ${data.country_name}`;
+
+  if (data.utc_offset !== null) {
+    timezoneEl.textContent =
+      "UTC: " + data.utc_offset.slice(0, 3) + ":" + data.utc_offset.slice(3);
+  } else {
+    timezoneEl.textContent = data.timezone;
+  }
+
+  ispEl.textContent = data.org;
+  map.setView(coords, 13);
+  marker.setLatLng(coords);
+  marker.bindPopup(`<b>${data.ip}</b>`).openPopup();
+}
+
+function displayError(error) {
+  console.log(error);
+}
+
+
+
+
+
+// draft Code
 // const map = L.map('map').setView([0, 0], 13);
 
 // L.tileLayer(tileUrl, {
@@ -100,78 +182,3 @@ ipInputEl.addEventListener('submit', function(){
 //     console.log(e)
 //     // modal.showModal();
 // }
-
-let map = null;
-let marker = null;
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      const { latitude, longitude } = position.coords;
-      const coords = [latitude, longitude];
-      initializeMap(coords);
-      fetchGeoLocationData(coords);
-    },
-    function () {
-      alert("Could not get location");
-    }
-  );
-}
-
-function initializeMap(coords) {
-  map = L.map("map").setView(coords, 13);
-
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-
-  marker = L.marker(coords).addTo(map);
-}
-
-function fetchGeoLocationData(coords) {
-  fetch("https://ipapi.co/json/")
-    .then((res) => res.json())
-    .then((data) => renderResults(data, coords))
-    .catch((error) => displayError(error));
-}
-
-formEl.onsubmit = (e) => {
-  e.preventDefault();
-  const ipAddress = ipInputEl.value;
-
-  fetch(`https://ipapi.co/${ipAddress}/json/`)
-    .then((res) => res.json())
-    .then((data) => {
-      const coords = [data.latitude, data.longitude];
-      map.setView(coords, 13);
-      marker.setLatLng(coords);
-      renderResults(data, coords);
-    })
-    .catch((error) => displayError(error));
-};
-
-function renderResults(data, coords) {
-  if (!data || data.error) {
-    throw new Error("Invalid data received");
-  }
-
-  ipEl.textContent = data.ip;
-  locationEl.textContent = `${data.city}, ${data.region}, ${data.country_name}`;
-
-  if (data.utc_offset !== null) {
-    timezoneEl.textContent =
-      "UTC: " + data.utc_offset.slice(0, 3) + ":" + data.utc_offset.slice(3);
-  } else {
-    timezoneEl.textContent = data.timezone;
-  }
-
-  ispEl.textContent = data.org;
-  map.setView(coords, 13);
-  marker.setLatLng(coords);
-  marker.bindPopup(`<b>${data.ip}</b>`).openPopup();
-}
-
-function displayError(error) {
-  console.log(error);
-}

@@ -4,6 +4,12 @@ html {
   font-size: 62.5%;
 }
 
+input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -44,22 +50,26 @@ body {
 .form {
   display: flex;
   /* gap: -1; */
-  width: 40%;
+  /* width: 40%; */
   /* margin-inline: 0 auto; */
   /* margin: 0 5rem; */
   padding: 0 5rem;
 }
 
 input {
-  min-width: 90%;
-  padding: 1rem;
+  /* min-width: 90%; */
+  /* width: min(500px, 70%);
+   */
+   width: max(450px, 70%);
+  padding: 1.5rem;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   outline: none;
   border: none;
 }
 button {
-  width: 10%;
+  /* width: 10%; */
+  padding: 1rem 1.25rem;
   border: none;
   /* background-color: hsl(0, 0%, 59%); */
   background-color: hsl(0, 0%, 17%);
@@ -177,5 +187,26 @@ button {
 
     .tracker div:not(:first-child)::before {
         display: none;
+    }
+
+    input{
+        width: max(270px, 70%);
+    }
+
+    .search h2{
+        font-weight: 400;
+    }
+  }
+
+  @media only screen and (max-width: 425px){
+    
+    .form{
+        width: 100%;
+        /* margin-inline: auto; */
+        justify-content: center;
+    }
+
+    input{
+        width: 90%;
     }
   }
