@@ -51,7 +51,7 @@ body {
 }
 
 input {
-  width: 90%;
+  min-width: 90%;
   padding: 1rem;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
@@ -141,4 +141,41 @@ button {
     height: 100%;
     /* z-index: ; */
     /* background-color: red; */
+  }
+
+  /* Media query */
+  @media only screen and (max-width: 1157px) {
+    .tracker{
+        width: 70%;
+    }
+  }
+
+  @media only screen and (max-width: 977px) {
+    .tracker{
+        width: 85%;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .tracker{
+        width: 90%;
+    }
+  }
+
+  @media only screen and (max-width: 760px) {
+    .tracker{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .tracker div{
+        max-width: initial;
+    }
+
+    .tracker div:not(:first-child)::before {
+        display: none;
+    }
   }
