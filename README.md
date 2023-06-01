@@ -6,7 +6,7 @@
 
 ## The challenge
 
-The challenge was to build out this IP Address Tracker app and get it looking as close to the design as possible. I generated the map using [LeafletJS](https://leafletjs.com/). 
+The challenge was to build out this IP Address Tracker app using geolaction API. I generated the map using [LeafletJS](https://leafletjs.com/). 
 
 
 users should be able to:
